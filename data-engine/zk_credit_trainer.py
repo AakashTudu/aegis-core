@@ -11,7 +11,7 @@ import os
 # 1. CONFIGURATION & CONNECTIONS
 # ==========================================
 # RPC Node (Alchemy, Infura, or QuickNode)
-RPC_URL = "https://eth-mainnet.g.alchemy.com/v2/07EgKVF8YX-VrrPvpTONK"
+RPC_URL = "YOUR_ALCHEMY_KEY_HERE"
 w3 = Web3(Web3.HTTPProvider(RPC_URL))
 w3.middleware_onion.inject(ExtraDataToPOAMiddleware, layer=0)
 
