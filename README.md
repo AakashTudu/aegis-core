@@ -58,6 +58,7 @@ The protocol is currently live and verified on the Ethereum Sepolia Testnet.
 
 * **Off-Chain Thresholds:** Proving inequalities (e.g., $Z < 0$) inside a ZK circuit requires heavy bit-decomposition gadgets, exploding proof generation time. To optimize gas and compute, the circuit strictly calculates the raw $Z$ score and outputs it as a public signal. The `< 0` inequality check is deferred to the Solidity smart contract, where the operation costs practically zero gas.
 * **Negative Number Unwrapping:** Because Solidity does not natively understand finite-field wrapped prime numbers, the smart contract utilizes the formula $P - Z$ to unwrap the BabyJubJub prime and extract the exact negative risk score natively on-chain.
+* **EVM Trace & Data Privacy:** The calculation of the ML risk score and the Groth16 proof generation occurs 100% client-side, meaning the user's raw financial data never touches the RPC mempool. When the proof is submitted on-chain, the transaction payload contains only the mathematical proof and the public Z-score. Furthermore, to optimize gas, the `Groth16Verifier` is strictly utilized via `view` calls from the `zkCreditPool`. Therefore, the Verifier contract's public transaction history remains empty, as all EVM state changes and gas consumption are intentionally routed through the Pool contract.
 
 ---
 
